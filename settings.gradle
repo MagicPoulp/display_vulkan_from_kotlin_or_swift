@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "android_surface_view_with_vulkan"
