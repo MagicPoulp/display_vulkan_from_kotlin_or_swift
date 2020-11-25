@@ -1,0 +1,26 @@
+Third party libraries are licensed. The have licenses mentioned directly in their files.
+
+Apache Licenses:
+* Copyright (C) 2015-2016 Valve Corporation
+* Copyright (C) 2015-2016 LunarG, Inc.
+
+This seems like an MIT-license, but it has no name:
+
+/// OpenGL Mathematics (glm.g-truc.net)
+
+/// Copyright (c) 2005 - 2014 G-Truc Creation (www.g-truc.net)
+
+This repository itself is unlicensed for simplicity.
+
+If you want to show credits, you can mention the following:
+
+Special thanks to:
+
+--> Thierry Vilmart, for making the whole idea work, showing a vulkan rendered surface in kotlin
+
+--> Vlad, for the theoretical idea to use an android SurfaceView
+https://stackoverflow.com/questions/45157950/can-we-use-vulkan-with-java-activity-on-android-platform
+
+--> LunarG for the Vulkan code samples:
+https://github.com/LunarG/VulkanSamples.git
+
