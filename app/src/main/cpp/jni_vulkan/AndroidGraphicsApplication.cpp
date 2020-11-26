@@ -212,9 +212,6 @@ void AndroidGraphicsApplication::sampleMain() {
     destroy_command_pool(info);
     destroy_device(info);
     destroy_window(info);
-    // destroy the surface before the instance
-    // https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Window_surface
-    vkDestroySurfaceKHR(info.inst, info.surface, nullptr); // added
     destroy_instance(info);
 }
 
