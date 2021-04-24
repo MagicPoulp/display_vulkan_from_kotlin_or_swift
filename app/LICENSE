@@ -1,16 +1,19 @@
+See all the free licenses in the licenses folder.
+
+This code sample has an MIT license.
+MIT License
+Copyright (c) 2021 Thierry Vilmart
+
 Third party libraries are licensed. The have licenses mentioned directly in their files.
 
 Apache Licenses:
 * Copyright (C) 2015-2016 Valve Corporation
 * Copyright (C) 2015-2016 LunarG, Inc.
 
-MIT license for code copied from the KhornosGroup sample
-Apache License
-
 MIT license for VOLK, and the code copied from it
 Copyright (c) 2018-2019 Arseny Kapoulkine
 
-This GML library seems like an MIT-license, but it has no name:
+This seems like an MIT-license, but it has no name:
 
 /// OpenGL Mathematics (glm.g-truc.net)
 

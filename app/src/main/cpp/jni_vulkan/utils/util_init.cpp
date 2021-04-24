@@ -33,6 +33,7 @@ samples "init" utility functions
 #include <linux/input.h>
 #endif
 
+// Copyright (c) Khronos Group code sample
 #define VK_CHECK(x)                                                 \
 	do                                                              \
 	{                                                               \
@@ -2181,6 +2182,7 @@ void destroy_textures(struct sample_info &info) {
  * @return true if all required extensions are available
  * @return false otherwise
  */
+ // Copyright (c) Khronos Group code sample
 bool validate_extensions(const std::vector<const char *> &         required,
                          const std::vector<VkExtensionProperties> &available)
 {

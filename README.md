@@ -13,6 +13,9 @@ https://github.com/LunarG/VulkanSamples.git
 
 If it does not work, follow carefully the LunarG tutorial to fix things, re-generate the shaders, etc.
 
+The Khronos code sample was not used much (only small code copied).
+Do not confuse the LunarG sample and the KhronosGroup one.
+https://github.com/KhronosGroup/Vulkan-Samples
 
 swift:
 
