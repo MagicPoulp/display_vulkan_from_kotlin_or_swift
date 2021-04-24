@@ -57,8 +57,6 @@
 #include "vulkan/vk_sdk_platform.h"
 #endif
 
-//#include <vulkan/vulkan.h>
-
 /* Number of descriptor sets needs to be the same at alloc,       */
 /* pipeline layout creation, and descriptor set layout creation   */
 #define NUM_DESCRIPTOR_SETS 1
