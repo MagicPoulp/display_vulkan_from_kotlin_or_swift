@@ -33,6 +33,17 @@ samples "init" utility functions
 #include <linux/input.h>
 #endif
 
+#define VK_CHECK(x)                                                 \
+	do                                                              \
+	{                                                               \
+		VkResult err = x;                                           \
+		if (err)                                                    \
+		{                                                           \
+			LOGE("Detected Vulkan error: {}"); \
+			abort();                                                \
+		}                                                           \
+	} while (0)
+
 using namespace std;
 
 /*
@@ -81,6 +92,37 @@ VkResult init_global_layer_properties(struct sample_info &info) {
     */
     LOGI("Loaded Vulkan APIs.");
 #endif
+
+    uint32_t instance_extension_count;
+    VK_CHECK(vkEnumerateInstanceExtensionProperties(nullptr, &instance_extension_count, nullptr));
+
+    std::vector<VkExtensionProperties> instance_extensions(instance_extension_count);
+    VK_CHECK(vkEnumerateInstanceExtensionProperties(nullptr, &instance_extension_count, instance_extensions.data()));
+
+    std::vector<const char *> active_instance_extensions({VK_KHR_SURFACE_EXTENSION_NAME});
+
+    #if defined(VKB_DEBUG) || defined(VKB_VALIDATION_LAYERS)
+    active_instance_extensions.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
+#endif
+
+#if defined(VK_USE_PLATFORM_ANDROID_KHR)
+    active_instance_extensions.push_back(VK_KHR_ANDROID_SURFACE_EXTENSION_NAME);
+#elif defined(VK_USE_PLATFORM_WIN32_KHR)
+    active_instance_extensions.push_back(VK_KHR_WIN32_SURFACE_EXTENSION_NAME);
+#elif defined(VK_USE_PLATFORM_MACOS_MVK)
+	active_instance_extensions.push_back(VK_MVK_MACOS_SURFACE_EXTENSION_NAME);
+#elif defined(VK_USE_PLATFORM_XCB_KHR)
+	active_instance_extensions.push_back(VK_KHR_XCB_SURFACE_EXTENSION_NAME);
+#elif defined(VK_USE_PLATFORM_DISPLAY_KHR)
+	active_instance_extensions.push_back(VK_KHR_DISPLAY_EXTENSION_NAME);
+#else
+#	pragma error Platform not supported
+#endif
+
+    if (!validate_extensions(active_instance_extensions, instance_extensions))
+    {
+        throw std::runtime_error("Required instance extensions are missing.");
+    }
 
     /*
      * It's possible, though very rare, that the number of
@@ -184,10 +226,6 @@ void init_instance_extension_names(struct sample_info &info) {
 }
 
 VkResult init_instance(struct sample_info &info, char const *const app_short_name) {
-    if (volkInitialize())
-    {
-        throw std::runtime_error("Failed to initialize volk.");
-    }
 
     VkApplicationInfo app_info = {};
     app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
@@ -210,6 +248,7 @@ VkResult init_instance(struct sample_info &info, char const *const app_short_nam
 
     VkResult res = vkCreateInstance(&inst_info, NULL, &info.inst);
     assert(res == VK_SUCCESS);
+    volkLoadInstance(info.inst);
 
     return res;
 }
@@ -2131,4 +2170,37 @@ void destroy_textures(struct sample_info &info) {
         vkDestroyBuffer(info.device, info.textures[i].buffer, NULL);
         vkFreeMemory(info.device, info.textures[i].buffer_memory, NULL);
     }
+}
+
+
+/**
+ * @brief Validates a list of required extensions, comparing it with the available ones.
+ *
+ * @param required A vector containing required extension names.
+ * @param available A VkExtensionProperties object containing available extensions.
+ * @return true if all required extensions are available
+ * @return false otherwise
+ */
+bool validate_extensions(const std::vector<const char *> &         required,
+                         const std::vector<VkExtensionProperties> &available)
+{
+    for (auto extension : required)
+    {
+        bool found = false;
+        for (auto &available_extension : available)
+        {
+            if (strcmp(available_extension.extensionName, extension) == 0)
+            {
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+        {
+            return false;
+        }
+    }
+
+    return true;
 }

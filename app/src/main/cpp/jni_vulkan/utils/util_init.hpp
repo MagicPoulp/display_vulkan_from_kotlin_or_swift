@@ -121,5 +121,7 @@ void destroy_command_pool(struct sample_info &info);
 void destroy_device(struct sample_info &info);
 void destroy_instance(struct sample_info &info);
 void destroy_window(struct sample_info &info);
+bool validate_extensions(const std::vector<const char *> &         required,
+                         const std::vector<VkExtensionProperties> &available);
 
 #endif // UTIL_INIT
