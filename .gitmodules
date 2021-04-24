@@ -1,0 +1,3 @@
+[submodule "app/src/main/cpp/volk"]
+	path = app/src/main/cpp/volk
+	url = https://github.com/zeux/volk.git

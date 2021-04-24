@@ -1,6 +1,4 @@
 #include <util_init.hpp>
-#define VK_USE_PLATFORM_ANDROID_KHR 1
-#include <vulkan/vulkan.h>
 #include "AndroidGraphicsApplication.hpp"
 #include "cube_data.h"
 
@@ -53,6 +51,10 @@ void AndroidGraphicsApplication::sampleMain() {
     const bool depthPresent = true;
 
     //process_command_line_args(info, argc, argv);
+    if (volkInitialize())
+    {
+        throw std::runtime_error("Failed to initialize volk.");
+    }
     init_global_layer_properties(info);
     init_instance_extension_names(info);
     init_device_extension_names(info);

@@ -1,13 +1,14 @@
 #ifndef ANDROID_SURFACE_VIEW_WITH_VULKAN_ANDROIDGRAPHICSAPPLICATION_HPP
 #define ANDROID_SURFACE_VIEW_WITH_VULKAN_ANDROIDGRAPHICSAPPLICATION_HPP
 
-#define VK_USE_PLATFORM_ANDROID_KHR 1
-#include <vulkan/vulkan.h>
+
 #include <vector>
 #include <string>
 #include <android/asset_manager.h>
 #include <android/native_window.h>
 #include <util_init.hpp>
+#define VOLK_IMPLEMENTATION
+#include "volk_setup.hpp"
 #include "GraphicsApplication.hpp" // Base class shared with iOS/macOS/...
 
 class AndroidGraphicsApplication : public GraphicsApplication {

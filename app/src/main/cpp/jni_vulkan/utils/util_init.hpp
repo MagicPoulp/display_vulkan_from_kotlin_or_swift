@@ -22,8 +22,8 @@
 #define UTIL_INIT
 
 #include <android/native_window.h>
-#define VK_USE_PLATFORM_ANDROID_KHR 1
-#include <vulkan/vulkan.h>
+
+#include "volk_setup.hpp"
 #include "util.hpp"
 
 // Make sure functions start with init, execute, or destroy to assist codegen
@@ -121,5 +121,7 @@ void destroy_command_pool(struct sample_info &info);
 void destroy_device(struct sample_info &info);
 void destroy_instance(struct sample_info &info);
 void destroy_window(struct sample_info &info);
+bool validate_extensions(const std::vector<const char *> &         required,
+                         const std::vector<VkExtensionProperties> &available);
 
 #endif // UTIL_INIT
