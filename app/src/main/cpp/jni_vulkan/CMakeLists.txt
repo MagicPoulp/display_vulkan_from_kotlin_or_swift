@@ -8,6 +8,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/utils)
 
 include_directories(${ANDROID_NDK}//sources/android/native_app_glue)
 
+if (ANDROID)
+    set(VOLK_STATIC_DEFINES VK_USE_PLATFORM_ANDROID_KHR)
+elseif()
+endif()
+
 include_directories(volk)
 
 add_library(
