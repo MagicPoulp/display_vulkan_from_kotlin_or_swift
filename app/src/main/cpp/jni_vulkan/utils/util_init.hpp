@@ -22,8 +22,8 @@
 #define UTIL_INIT
 
 #include <android/native_window.h>
-#define VK_USE_PLATFORM_ANDROID_KHR 1
-#include <vulkan/vulkan.h>
+
+#include "volk_setup.hpp"
 #include "util.hpp"
 
 // Make sure functions start with init, execute, or destroy to assist codegen

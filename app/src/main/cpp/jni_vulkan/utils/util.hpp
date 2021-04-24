@@ -20,8 +20,6 @@
 #define UTIL_INIT_BARE
 
 #include <android/native_window.h>
-#define VK_USE_PLATFORM_ANDROID_KHR 1
-#include <vulkan/vulkan.h>
 
 #include <iostream>
 #include <string>
@@ -31,6 +29,8 @@
 #define GLM_FORCE_RADIANS
 #include "glm/glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
+
+#include "volk_setup.hpp"
 
 #ifdef _WIN32
 #pragma comment(linker, "/subsystem:console")
@@ -57,7 +57,7 @@
 #include "vulkan/vk_sdk_platform.h"
 #endif
 
-#include <vulkan/vulkan.h>
+//#include <vulkan/vulkan.h>
 
 /* Number of descriptor sets needs to be the same at alloc,       */
 /* pipeline layout creation, and descriptor set layout creation   */
@@ -156,7 +156,8 @@ struct sample_info {
 #elif defined(VK_USE_PLATFORM_METAL_EXT)
     void *caMetalLayer;
 #elif defined(__ANDROID__)
-    PFN_vkCreateAndroidSurfaceKHR fpCreateAndroidSurfaceKHR;
+    // DEBUG
+    //PFN_vkCreateAndroidSurfaceKHR fpCreateAndroidSurfaceKHR;
 #elif defined(VK_USE_PLATFORM_WAYLAND_KHR)
     wl_display *display;
     wl_registry *registry;

@@ -4,9 +4,11 @@
 cmake_minimum_required(VERSION 3.10.2)
 # message(WARNING ${ANDROID_NDK})
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/utils/)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/utils)
 
 include_directories(${ANDROID_NDK}//sources/android/native_app_glue)
+
+include_directories(volk)
 
 add_library(
         jni_vulkan
@@ -15,6 +17,7 @@ add_library(
 
 SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fpermissive")
 
-target_link_libraries(jni_vulkan PRIVATE log vulkan android)
+add_subdirectory(volk)
+target_link_libraries(jni_vulkan PRIVATE log android volk)
 
 SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fpermissive")

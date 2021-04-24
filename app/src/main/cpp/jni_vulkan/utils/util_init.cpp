@@ -184,6 +184,11 @@ void init_instance_extension_names(struct sample_info &info) {
 }
 
 VkResult init_instance(struct sample_info &info, char const *const app_short_name) {
+    if (volkInitialize())
+    {
+        throw std::runtime_error("Failed to initialize volk.");
+    }
+
     VkApplicationInfo app_info = {};
     app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
     app_info.pNext = NULL;
@@ -717,15 +722,13 @@ void init_swapchain_extension(struct sample_info &info, ANativeWindow *window) {
     createInfo.hwnd = info.window;
     res = vkCreateWin32SurfaceKHR(info.inst, &createInfo, NULL, &info.surface);
 #elif defined(__ANDROID__)
-    GET_INSTANCE_PROC_ADDR(info.inst, CreateAndroidSurfaceKHR);
-
     VkAndroidSurfaceCreateInfoKHR createInfo;
     createInfo.sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
     createInfo.pNext = nullptr;
     createInfo.flags = 0;
     //createInfo.window = AndroidGetApplicationWindow();
     createInfo.window = window; // PATCHED
-    res = info.fpCreateAndroidSurfaceKHR(info.inst, &createInfo, nullptr, &info.surface);
+    res = vkCreateAndroidSurfaceKHR(info.inst, &createInfo, nullptr, &info.surface);
 #elif defined(VK_USE_PLATFORM_METAL_EXT)
     VkMetalSurfaceCreateInfoEXT createInfo = {};
     createInfo.sType = VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT;

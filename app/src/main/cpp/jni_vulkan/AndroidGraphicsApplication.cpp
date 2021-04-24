@@ -1,6 +1,4 @@
 #include <util_init.hpp>
-#define VK_USE_PLATFORM_ANDROID_KHR 1
-#include <vulkan/vulkan.h>
 #include "AndroidGraphicsApplication.hpp"
 #include "cube_data.h"
 
