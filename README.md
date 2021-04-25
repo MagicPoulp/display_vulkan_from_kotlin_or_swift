@@ -1,7 +1,8 @@
 # Introduction
 
-It is possible to shows a Vulkan rendered surface, in a part of the screen, from Kotlin or Swift, and not just in pure C/C++, or Objective-C.
+It is possible to show a Vulkan rendered surface, in a part of the screen, from Kotlin or Swift, and not just in pure C/C++, or Objective-C.
 
+Vulkan can improve the frame rate, and save the batteries.
 
 kotlin:
 
