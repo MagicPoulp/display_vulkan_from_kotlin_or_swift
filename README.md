@@ -1,3 +1,11 @@
+# Version hisotry
+
+git tag -n
+
+1.1.0   Just displays a SurfaceView with Vulkan
+
+1.2.0   Display a Vulkan SurfaceView on top of a Camera PreviewView
+
 # Introduction
 
 It is possible to show a Vulkan rendered surface, in a part of the screen, from Kotlin or Swift, and not just in pure C/C++, or Objective-C.
