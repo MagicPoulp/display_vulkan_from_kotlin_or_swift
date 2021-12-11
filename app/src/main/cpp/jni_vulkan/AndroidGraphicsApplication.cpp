@@ -77,6 +77,8 @@ void AndroidGraphicsApplication::sampleMain() {
     init_uniform_buffer(info);
     init_descriptor_and_pipeline_layouts(info, false);
     init_renderpass(info, depthPresent);
+    // we could compile our own shaders, but here we use pre-made data
+    // https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Shader_modules
 #include "15-draw_cube.vert.h"
 #include "15-draw_cube.frag.h"
     VkShaderModuleCreateInfo vert_info = {};

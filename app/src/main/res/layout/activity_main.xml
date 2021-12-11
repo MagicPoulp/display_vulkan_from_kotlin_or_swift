@@ -5,14 +5,6 @@ android:layout_height="match_parent"
 android:orientation="vertical"
 android:id= "@+id/linearlayout1" >
 
-<!-- Custom SurfaceView -->
-<!--
-<com.thierry.android_surface_view_with_vulkan.VulkanSurfaceView
-    android:id="@+id/myVulkanSurfaceView"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="0.23" />-->
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,6 +13,10 @@ android:id= "@+id/linearlayout1" >
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/previewView" />
+        <com.thierry.android_surface_view_with_vulkan.VulkanSurfaceView
+           android:id="@+id/myVulkanSurfaceView"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content" />
     </FrameLayout>
 
 </LinearLayout>

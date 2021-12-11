@@ -10,8 +10,9 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.google.common.util.concurrent.ListenableFuture
-import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
+import android.graphics.PixelFormat
+import android.view.SurfaceView
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +21,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // solution to superpose the camera and the Vulkan surface
+        val sfvTrack = findViewById<SurfaceView>(R.id.myVulkanSurfaceView)
+        //sfvTrack.setZOrderOnTop(true) // not needed
+        sfvTrack.setZOrderMediaOverlay(true)
+
+        val sfhTrackHolder = sfvTrack.holder
+        sfhTrackHolder.setFormat(PixelFormat.TRANSPARENT)
 
         // https://www.titanwolf.org/Network/q/069ee91e-3ffe-4dd6-ad79-e0e63922c0ac/y
         ActivityCompat.requestPermissions(this,
